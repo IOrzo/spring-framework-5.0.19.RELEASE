@@ -51,7 +51,9 @@ import org.springframework.util.xml.SimpleSaxErrorHandler;
 import org.springframework.util.xml.XmlValidationModeDetector;
 
 /**
+ * 从XML中读取BeanDefinition
  * Bean definition reader for XML bean definitions.
+ * 委托给BeanDefinitionDocumentReader从XML中读取
  * Delegates the actual XML document reading to an implementation
  * of the {@link BeanDefinitionDocumentReader} interface.
  *
@@ -69,8 +71,8 @@ import org.springframework.util.xml.XmlValidationModeDetector;
  * @author Chris Beams
  * @since 26.11.2003
  * @see #setDocumentReaderClass
- * @see BeanDefinitionDocumentReader
- * @see DefaultBeanDefinitionDocumentReader
+ * @see BeanDefinitionDocumentReader 对 Document 进行解析
+ * @see DefaultBeanDefinitionDocumentReader BeanDefinitionDocumentReader实现类
  * @see BeanDefinitionRegistry
  * @see org.springframework.beans.factory.support.DefaultListableBeanFactory
  * @see org.springframework.context.support.GenericApplicationContext
@@ -301,6 +303,7 @@ public class XmlBeanDefinitionReader extends AbstractBeanDefinitionReader {
 	 */
 	@Override
 	public int loadBeanDefinitions(Resource resource) throws BeanDefinitionStoreException {
+		// EncodedResource 的作用是对资服文件进行编码处理
 		return loadBeanDefinitions(new EncodedResource(resource));
 	}
 
@@ -316,7 +319,7 @@ public class XmlBeanDefinitionReader extends AbstractBeanDefinitionReader {
 		if (logger.isInfoEnabled()) {
 			logger.info("Loading XML bean definitions from " + encodedResource);
 		}
-
+		// 通过属性来记录已经加载的资源
 		Set<EncodedResource> currentResources = this.resourcesCurrentlyBeingLoaded.get();
 		if (currentResources == null) {
 			currentResources = new HashSet<>(4);
@@ -327,12 +330,15 @@ public class XmlBeanDefinitionReader extends AbstractBeanDefinitionReader {
 					"Detected cyclic loading of " + encodedResource + " - check your import definitions!");
 		}
 		try {
+			// 从 encodedResource 中获取已经封装的 Resource 对象并在此从 Resource 中获取其中的 inputStream
 			InputStream inputStream = encodedResource.getResource().getInputStream();
 			try {
+				// InputSource 这个类并不米自于 Spring, 它的全路径是org.xml.sax.InputSource
 				InputSource inputSource = new InputSource(inputStream);
 				if (encodedResource.getEncoding() != null) {
 					inputSource.setEncoding(encodedResource.getEncoding());
 				}
+				// 真正从XMl中加载BeanDefinitions
 				return doLoadBeanDefinitions(inputSource, encodedResource.getResource());
 			}
 			finally {
@@ -388,7 +394,11 @@ public class XmlBeanDefinitionReader extends AbstractBeanDefinitionReader {
 	protected int doLoadBeanDefinitions(InputSource inputSource, Resource resource)
 			throws BeanDefinitionStoreException {
 		try {
+			// DocumentLoader 加载 Document
+			// 1. 获取对 XML 文件的验证模式
+			// 2. 加载 XML 文件，并得到对应的 Document
 			Document doc = doLoadDocument(inputSource, resource);
+			// 3. 根据返回的 Document 注册 Bean 信息
 			return registerBeanDefinitions(doc, resource);
 		}
 		catch (BeanDefinitionStoreException ex) {
@@ -424,6 +434,8 @@ public class XmlBeanDefinitionReader extends AbstractBeanDefinitionReader {
 	 * @throws Exception when thrown from the DocumentLoader
 	 * @see #setDocumentLoader
 	 * @see DocumentLoader#loadDocument
+	 * DocumentLoader 读取器加载 Document
+	 * @see DefaultDocumentLoader#loadDocument(InputSource, EntityResolver, ErrorHandler, int, boolean)
 	 */
 	protected Document doLoadDocument(InputSource inputSource, Resource resource) throws Exception {
 		return this.documentLoader.loadDocument(inputSource, getEntityResolver(), this.errorHandler,
@@ -503,9 +515,17 @@ public class XmlBeanDefinitionReader extends AbstractBeanDefinitionReader {
 	 * @see BeanDefinitionDocumentReader#registerBeanDefinitions
 	 */
 	public int registerBeanDefinitions(Document doc, Resource resource) throws BeanDefinitionStoreException {
+		// 使用 BeanDefinitionDocumentReader 实例化 BeanDefinitionDocumentReader
 		BeanDefinitionDocumentReader documentReader = createBeanDefinitionDocumentReader();
+		// 记录统计前BeanDefinition加载的个数
 		int countBefore = getRegistry().getBeanDefinitionCount();
+		/**
+		 * 加载及注册 bean
+		 * @see DefaultBeanDefinitionDocumentReader#registerBeanDefinitions
+		 * createReaderContext 创建 XmlReaderContext 时 会把当前对象作为参数传入进去
+ 		 */
 		documentReader.registerBeanDefinitions(doc, createReaderContext(resource));
+		// 记录本次加载的 BeanDefinition 个数
 		return getRegistry().getBeanDefinitionCount() - countBefore;
 	}
 

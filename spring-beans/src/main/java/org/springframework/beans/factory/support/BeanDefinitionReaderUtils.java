@@ -61,6 +61,8 @@ public class BeanDefinitionReaderUtils {
 		bd.setParentName(parentName);
 		if (className != null) {
 			if (classLoader != null) {
+				// 如果 classLoader 不为空， 则使用以传人的 classLoader 同－虚拟机载类对象，否则只是
+				// 记录 className
 				bd.setBeanClass(ClassUtils.forName(className, classLoader));
 			}
 			else {
@@ -146,13 +148,22 @@ public class BeanDefinitionReaderUtils {
 			throws BeanDefinitionStoreException {
 
 		// Register bean definition under primary name.
+		// 使用 beanNarne 做唯一标识注册
 		String beanName = definitionHolder.getBeanName();
+		/**
+		 * @see DefaultListableBeanFactory#registerBeanDefinition(String, BeanDefinition)
+		 * 注册BeanDefinition
+		 */
 		registry.registerBeanDefinition(beanName, definitionHolder.getBeanDefinition());
 
-		// Register aliases for bean name, if any.
+		// Register aliases for bean name, if any. 注册bean名称的别名（如果有）
+		// 注册所有的别名
 		String[] aliases = definitionHolder.getAliases();
 		if (aliases != null) {
 			for (String alias : aliases) {
+				/**
+				 * @see org.springframework.core.SimpleAliasRegistry#registerAlias(String name, String alias)
+				 */
 				registry.registerAlias(beanName, alias);
 			}
 		}
