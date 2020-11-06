@@ -46,8 +46,10 @@ import org.springframework.util.ObjectUtils;
 import org.springframework.util.StringUtils;
 
 /**
- * A basic {@link ConfigurablePropertyAccessor} that provides the necessary
- * infrastructure for all typical use cases.
+ * A basic {@link ConfigurablePropertyAccessor}(可配置属性访问器) that provides the necessary
+ * infrastructure(基础设施) for all typical use cases.
+ *
+ * 为所有典型用例提供必要的基础可配置属性访问器
  *
  * <p>This accessor will convert collection and array values to the corresponding
  * target collections or arrays, if necessary. Custom property editors that deal
