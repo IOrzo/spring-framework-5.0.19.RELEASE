@@ -50,6 +50,7 @@ public interface DeferredImportSelector extends ImportSelector {
 
 
 	/**
+	 * 用于对来自不同导入选择器的结果进行分组
 	 * Interface used to group results from different import selectors.
 	 * @since 5.0
 	 */

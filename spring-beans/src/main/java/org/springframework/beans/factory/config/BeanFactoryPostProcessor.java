@@ -53,6 +53,10 @@ public interface BeanFactoryPostProcessor {
 	 * @param beanFactory the bean factory used by the application context
 	 * @throws org.springframework.beans.BeansException in case of errors
 	 */
+	/**
+	 *	在标准初始化之后可修改 application context 内部的 bean factory, 所以的 bean definitions 已经加载完毕,
+	 *	但是 bean 还没有实例化, 这个方法可以覆盖和增加 bean 属性
+	 */
 	void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory) throws BeansException;
 
 }

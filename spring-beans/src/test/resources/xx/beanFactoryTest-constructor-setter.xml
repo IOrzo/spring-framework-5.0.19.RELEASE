@@ -20,4 +20,8 @@
 		<property name="testA" ref="testA"/>
 	</bean>
 
+	<bean id="car" class="org.springframework.xx.CarFactoryBean">
+		<property name="carInfo" value="超级跑车,400,200000"/>
+	</bean>
+
 </beans>

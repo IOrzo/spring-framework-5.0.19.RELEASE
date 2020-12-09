@@ -167,6 +167,7 @@ class ConfigurationClassParser {
 		for (BeanDefinitionHolder holder : configCandidates) {
 			BeanDefinition bd = holder.getBeanDefinition();
 			try {
+				// 解析配置类中的各个注解
 				if (bd instanceof AnnotatedBeanDefinition) {
 					parse(((AnnotatedBeanDefinition) bd).getMetadata(), holder.getBeanName());
 				}
@@ -186,6 +187,7 @@ class ConfigurationClassParser {
 			}
 		}
 
+		// 处理延期的导入选择器
 		processDeferredImportSelectors();
 	}
 
@@ -243,6 +245,7 @@ class ConfigurationClassParser {
 		// Recursively process the configuration class and its superclass hierarchy.
 		SourceClass sourceClass = asSourceClass(configClass);
 		do {
+			// 处理配置类中的各个注解 @PropertySource @ComponentScan @Import @ImportResource @Bean
 			sourceClass = doProcessConfigurationClass(configClass, sourceClass);
 		}
 		while (sourceClass != null);
@@ -315,7 +318,7 @@ class ConfigurationClassParser {
 			}
 		}
 
-		// Process individual @Bean methods
+		// Process individual(个人) @Bean methods
 		Set<MethodMetadata> beanMethods = retrieveBeanMethodMetadata(sourceClass);
 		for (MethodMetadata methodMetadata : beanMethods) {
 			configClass.addBeanMethod(new BeanMethod(methodMetadata, configClass));
@@ -560,7 +563,8 @@ class ConfigurationClassParser {
 			configurationClasses.put(deferredImport.getConfigurationClass().getMetadata(),
 					deferredImport.getConfigurationClass());
 		}
-		for (DeferredImportSelectorGrouping grouping : groupings.values()) {
+		for (DeferredImportSelectorGrouping grouping : groupings.values()) { // 遍历 DeferredImportSelector
+			// getImports()中
 			grouping.getImports().forEach(entry -> {
 				ConfigurationClass configurationClass = configurationClasses.get(entry.getMetadata());
 				try {
@@ -616,6 +620,7 @@ class ConfigurationClassParser {
 						else {
 							String[] importClassNames = selector.selectImports(currentSourceClass.getMetadata());
 							Collection<SourceClass> importSourceClasses = asSourceClasses(importClassNames);
+							// 处理 Imports
 							processImports(configClass, currentSourceClass, importSourceClasses, false);
 						}
 					}
@@ -825,10 +830,17 @@ class ConfigurationClassParser {
 		 * @return each import with its associated configuration class
 		 */
 		public Iterable<Group.Entry> getImports() {
+			/**
+			 * 加载 META-INF/spring.factories 中 EnableAutoConfiguration 配置类
+			 * @see org.springframework.boot.autoconfigure.AutoConfigurationImportSelector#selectImports(AnnotationMetadata)
+			 */
 			for (DeferredImportSelectorHolder deferredImport : this.deferredImports) {
+				// AutoConfigurationGroup#process中调用DeferredImportSelector#selectImports方法,
+				// 获取 EnableAutoConfiguration 自动装配类
 				this.group.process(deferredImport.getConfigurationClass().getMetadata(),
 						deferredImport.getImportSelector());
 			}
+			// 转化数据为 Group.Entry
 			return this.group.selectImports();
 		}
 	}

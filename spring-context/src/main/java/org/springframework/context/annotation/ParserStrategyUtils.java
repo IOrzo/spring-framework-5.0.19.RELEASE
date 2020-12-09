@@ -28,6 +28,7 @@ import org.springframework.core.env.Environment;
 import org.springframework.core.io.ResourceLoader;
 
 /**
+ * 通用委托代码，用于处理解析器策略
  * Common delegate code for the handling of parser strategies, e.g.
  * {@code TypeFilter}, {@code ImportSelector}, {@code ImportBeanDefinitionRegistrar}
  *

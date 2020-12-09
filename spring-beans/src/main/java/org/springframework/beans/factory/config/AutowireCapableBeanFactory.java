@@ -127,6 +127,9 @@ public interface AutowireCapableBeanFactory extends BeanFactory {
 	 * @param beanClass the class of the bean to create
 	 * @return the new bean instance
 	 * @throws BeansException if instantiation or wiring failed
+	 *
+	 * 完全创建给定类的新bean实例
+	 * 对Bean进行完全初始化，包括执行所有的 BeanPostProcessor
 	 */
 	<T> T createBean(Class<T> beanClass) throws BeansException;
 
@@ -271,6 +274,9 @@ public interface AutowireCapableBeanFactory extends BeanFactory {
 	 * (only passed to {@link BeanPostProcessor BeanPostProcessors})
 	 * @return the bean instance to use, either the original or a wrapped one
 	 * @throws BeansException if the initialization failed
+	 *
+	 * 初始化指定的 bean, 并执行相应的回调函数, setBeanName、setBeanFactory、
+	 * 所有的 post processors
 	 */
 	Object initializeBean(Object existingBean, String beanName) throws BeansException;
 
@@ -284,6 +290,8 @@ public interface AutowireCapableBeanFactory extends BeanFactory {
 	 * @return the bean instance to use, either the original or a wrapped one
 	 * @throws BeansException if any post-processing failed
 	 * @see BeanPostProcessor#postProcessBeforeInitialization
+	 *
+	 * 执行回调函数 BeanPostProcessor#postProcessBeforeInitialization
 	 */
 	Object applyBeanPostProcessorsBeforeInitialization(Object existingBean, String beanName)
 			throws BeansException;
@@ -298,6 +306,8 @@ public interface AutowireCapableBeanFactory extends BeanFactory {
 	 * @return the bean instance to use, either the original or a wrapped one
 	 * @throws BeansException if any post-processing failed
 	 * @see BeanPostProcessor#postProcessAfterInitialization
+	 *
+	 * 执行回调函数 BeanPostProcessor#postProcessAfterInitialization
 	 */
 	Object applyBeanPostProcessorsAfterInitialization(Object existingBean, String beanName)
 			throws BeansException;

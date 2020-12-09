@@ -135,6 +135,7 @@ public class AnnotationConfigUtils {
 	}
 
 	/**
+	 * 注册所有相关的注解后置处理器
 	 * Register all relevant annotation post processors in the given registry.
 	 * @param registry the registry to operate on
 	 * @param source the configuration source element (already extracted)
@@ -155,6 +156,7 @@ public class AnnotationConfigUtils {
 			}
 		}
 
+		// 硬编码, 注册内置的后置处理器
 		Set<BeanDefinitionHolder> beanDefs = new LinkedHashSet<>(8);
 
 		if (!registry.containsBeanDefinition(CONFIGURATION_ANNOTATION_PROCESSOR_BEAN_NAME)) {

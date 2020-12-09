@@ -35,7 +35,7 @@ public interface AnnotationConfigRegistry {
 	void register(Class<?>... annotatedClasses);
 
 	/**
-	 * Perform a scan within the specified base packages.
+	 * Perform(执行) a scan within the specified base packages.
 	 * @param basePackages the packages to check for annotated classes
 	 */
 	void scan(String... basePackages);

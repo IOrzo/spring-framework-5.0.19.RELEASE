@@ -349,6 +349,7 @@ public interface ConfigurableBeanFactory extends HierarchicalBeanFactory, Single
 	void setCurrentlyInCreation(String beanName, boolean inCreation);
 
 	/**
+	 * 判断指定的bean是否是在创建中
 	 * Determine whether the specified bean is currently in creation.
 	 * @param beanName the name of the bean
 	 * @return whether the bean is currently in creation

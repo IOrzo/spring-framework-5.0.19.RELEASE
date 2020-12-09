@@ -27,12 +27,12 @@ import org.springframework.core.io.Resource;
 import org.springframework.lang.Nullable;
 
 /**
- * Convenient base class for {@link org.springframework.context.ApplicationContext}
+ * Convenient(方便) base class for {@link org.springframework.context.ApplicationContext}
  * implementations, drawing configuration from XML documents containing bean definitions
  * understood by an {@link org.springframework.beans.factory.xml.XmlBeanDefinitionReader}.
  *
  * <p>Subclasses just have to implement the {@link #getConfigResources} and/or
- * the {@link #getConfigLocations} method. Furthermore, they might override
+ * the {@link #getConfigLocations} method. Furthermore(此外), they might override
  * the {@link #getResourceByPath} hook to interpret relative paths in an
  * environment-specific fashion, and/or {@link #getResourcePatternResolver}
  * for extended pattern resolution.

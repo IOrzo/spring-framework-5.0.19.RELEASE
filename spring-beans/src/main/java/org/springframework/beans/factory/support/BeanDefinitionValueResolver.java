@@ -228,7 +228,7 @@ class BeanDefinitionValueResolver {
 	}
 
 	/**
-	 * Evaluate the given value as an expression, if necessary.
+	 * Evaluate(评估) the given value as an expression, if necessary.
 	 * @param value the original value (may be an expression)
 	 * @return the resolved value if necessary, or the original value
 	 */

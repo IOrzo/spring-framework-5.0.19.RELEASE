@@ -264,7 +264,7 @@ public abstract class AbstractBeanFactory extends FactoryBeanRegistrySupport imp
 		 * 就会将创建bean的objectFactory提早曝光, 也就是将objectFactory加入到缓存中，
 		 * 一旦下个bean创建时候需要依赖上个bean则直接使用objectFactory
 		 */
-		// 直接尝试从缓存获取或者singletonFactories中的objectFactory中获取
+		// 直接尝试从singletonObjects缓存获取或者singletonFactories中的objectFactory中获取
 		Object sharedInstance = getSingleton(beanName);
 		if (sharedInstance != null && args == null) {
 			if (logger.isDebugEnabled()) {
@@ -365,6 +365,7 @@ public abstract class AbstractBeanFactory extends FactoryBeanRegistrySupport imp
 							throw ex;
 						}
 					});
+					// 通过 BeanInstance 获取 bean, 若 BeanInstance 是 FactoryBean, 则通过 FactoryBean 创建 bean, 否则直接返回
 					bean = getObjectForBeanInstance(sharedInstance, name, beanName, mbd);
 				}
 
@@ -1668,6 +1669,10 @@ public abstract class AbstractBeanFactory extends FactoryBeanRegistrySupport imp
 	 * @param mbd the merged bean definition
 	 * @return the object to expose for the bean
 	 */
+	/**
+	 * 通过 BeanInstance 获取 bean, 若 BeanInstance 是 FactoryBean, 则通过 FactoryBean 创建
+	 * bean, 否则直接返回
+	 */
 	protected Object getObjectForBeanInstance(
 			Object beanInstance, String name, String beanName, @Nullable RootBeanDefinition mbd) {
 
@@ -1688,6 +1693,7 @@ public abstract class AbstractBeanFactory extends FactoryBeanRegistrySupport imp
 		// 现在我们有了个bean的实例，这个实例可能会是正常的bean或者是FactoryBean
 		// 如果是FactoryBean我们使用它创建实例，但是如果用户想要直接获取工厂实例而不是工厂的
 		// getObject方法对应的实例那么传人的name应该加人前缀&
+		// name 包含 '&' 前缀, 获取 FactoryBean, 直接返回
 		if (!(beanInstance instanceof FactoryBean) || BeanFactoryUtils.isFactoryDereference(name)) {
 			return beanInstance;
 		}

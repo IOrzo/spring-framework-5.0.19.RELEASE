@@ -28,10 +28,12 @@ public class BeanFactoryTest {
 			BeanFactory beanFactory = new XmlBeanFactory(new ClassPathResource("/xx/beanFactoryTest-constructor-setter.xml"));
 			MyTestBean myTestBean = (MyTestBean) beanFactory.getBean("myTestBean");
 			TestA testA = (TestA) beanFactory.getBean("testA");
+			CarFactoryBean carFactoryBean = (CarFactoryBean) beanFactory.getBean("&car");
+			Car car = (Car) beanFactory.getBean("car");
 			System.out.println("--- end ---");
 		} catch (Exception e) {
 			// 因为要在创建testC是抛出
-			Throwable cause = e.getCause().getCause().getCause();
+//			Throwable cause = e.getCause().getCause().getCause();
 			throw e;
 		}
 	}
