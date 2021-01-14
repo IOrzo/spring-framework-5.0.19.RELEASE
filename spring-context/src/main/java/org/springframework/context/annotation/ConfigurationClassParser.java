@@ -1,4 +1,4 @@
-/*
+ /*
  * Copyright 2002-2020 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -235,8 +235,8 @@ class ConfigurationClassParser {
 				return;
 			}
 			else {
-				// Explicit bean definition found, probably replacing an import.
-				// Let's remove the old one and go with the new one.
+				// Explicit bean definition found, probably replacing an import. 找到明确的bean定义，可能替换了导入
+				// Let's remove the old one and go with the new one. 让我们删除旧的，然后使用新的。
 				this.configurationClasses.remove(configClass);
 				this.knownSuperclasses.values().removeIf(configClass::equals);
 			}
@@ -281,7 +281,7 @@ class ConfigurationClassParser {
 			}
 		}
 
-		// Process any @ComponentScan annotations
+		// Process any @ComponentScan annotations 扫描路径下各个注解类
 		Set<AnnotationAttributes> componentScans = AnnotationConfigUtils.attributesForRepeatable(
 				sourceClass.getMetadata(), ComponentScans.class, ComponentScan.class);
 		if (!componentScans.isEmpty() &&
@@ -304,6 +304,7 @@ class ConfigurationClassParser {
 		}
 
 		// Process any @Import annotations
+		// 处理 @Import 注解, 把导入的类 或者 ImportSelector 中接口返回的类加入到 configurationClasses 中 
 		processImports(configClass, sourceClass, getImports(sourceClass), true);
 
 		// Process any @ImportResource annotations
@@ -343,7 +344,7 @@ class ConfigurationClassParser {
 	}
 
 	/**
-	 * Register member (nested) classes that happen to be configuration classes themselves.
+	 * Register member (nested) classes that happen to be configuration classes themselves. 注册碰巧是配置类本身的成员（嵌套）类
 	 */
 	private void processMemberClasses(ConfigurationClass configClass, SourceClass sourceClass) throws IOException {
 		Collection<SourceClass> memberClasses = sourceClass.getMemberClasses();
@@ -509,6 +510,7 @@ class ConfigurationClassParser {
 
 	/**
 	 * Returns {@code @Import} class, considering all meta-annotations.
+	 * 处理 @Import 注解, 返回注解中的 class
 	 */
 	private Set<SourceClass> getImports(SourceClass sourceClass) throws IOException {
 		Set<SourceClass> imports = new LinkedHashSet<>();
@@ -554,6 +556,9 @@ class ConfigurationClassParser {
 		deferredImports.sort(DEFERRED_IMPORT_COMPARATOR);
 		Map<Object, DeferredImportSelectorGrouping> groupings = new LinkedHashMap<>();
 		Map<AnnotationMetadata, ConfigurationClass> configurationClasses = new HashMap<>();
+		// 对 deferredImports 进行分组, 然后通过分组遍历执行分组下的 DeferredImportSelector
+		// 再对 DeferredImportSelector 返回的 configurationClass 进行解析
+		// 如：通过 AutoConfigurationImportSelector 返回 META-INF/spring.factories 中 EnableAutoConfiguration 的自动配置类
 		for (DeferredImportSelectorHolder deferredImport : deferredImports) {
 			Class<? extends Group> group = deferredImport.getImportSelector().getImportGroup();
 			DeferredImportSelectorGrouping grouping = groupings.computeIfAbsent(
@@ -611,6 +616,7 @@ class ConfigurationClassParser {
 						// Candidate class is an ImportSelector -> delegate to it to determine imports
 						Class<?> candidateClass = candidate.loadClass();
 						ImportSelector selector = BeanUtils.instantiateClass(candidateClass, ImportSelector.class);
+						// 执行已知接口方法: 如BeanClassLoaderAware、BeanFactoryAware、EnvironmentAware、EnvironmentAware
 						ParserStrategyUtils.invokeAwareMethods(
 								selector, this.environment, this.resourceLoader, this.registry);
 						if (this.deferredImportSelectors != null && selector instanceof DeferredImportSelector) {
@@ -866,7 +872,9 @@ class ConfigurationClassParser {
 
 	/**
 	 * Simple wrapper that allows annotated source classes to be dealt with
-	 * in a uniform manner, regardless of how they are loaded.
+	 * in a uniform manner(以统一的方式), regardless of how they are loaded.
+	 *
+	 * 一个简单的包装程序，使带注释的源类可以以统一的方式处理，而不管它们如何加载。
 	 */
 	private class SourceClass implements Ordered {
 

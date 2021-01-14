@@ -32,6 +32,14 @@ import org.springframework.util.ObjectUtils;
  * A {@link BeanWrapper} implementation should handle any necessary conversion,
  * as this object doesn't know anything about the objects it will be applied to.
  *
+ * 持有单个bean属性的信息和值的对象
+ * 在此处使用对象，而不是仅将所有属性存储在以属性名称为键的映射中
+ * 允许更大的灵活性，以及以优化方式处理索引属性等的能力
+ *
+ * 注意，该值不必是最终必需的类型：
+ * BeanWrapper 实现了应处理任何必要的转换,
+ * 因为此对象对将应用于的对象一无所知
+ *
  * @author Rod Johnson
  * @author Rob Harrop
  * @author Juergen Hoeller
@@ -143,8 +151,8 @@ public class PropertyValue extends BeanMetadataAttributeAccessor implements Seri
 	}
 
 	/**
-	 * Set whether this is an optional value, that is, to be ignored
-	 * when no corresponding property exists on the target class.
+	 * Set whether this is an optional value（设置是否为可选值）, that is, to be ignored
+	 * when no corresponding（相应的） property exists on the target class.
 	 * @since 3.0
 	 */
 	public void setOptional(boolean optional) {
