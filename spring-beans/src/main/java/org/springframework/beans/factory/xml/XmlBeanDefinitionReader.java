@@ -334,7 +334,7 @@ public class XmlBeanDefinitionReader extends AbstractBeanDefinitionReader {
 			// 从 encodedResource 中获取已经封装的 Resource 对象并在此从 Resource 中获取其中的 inputStream
 			InputStream inputStream = encodedResource.getResource().getInputStream();
 			try {
-				// InputSource 这个类并不米自于 Spring, 它的全路径是org.xml.sax.InputSource
+				// InputSource 这个类并不来自于 Spring, 它的全路径是org.xml.sax.InputSource
 				InputSource inputSource = new InputSource(inputStream);
 				if (encodedResource.getEncoding() != null) {
 					inputSource.setEncoding(encodedResource.getEncoding());

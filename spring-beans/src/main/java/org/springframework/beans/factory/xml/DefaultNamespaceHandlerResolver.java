@@ -149,6 +149,7 @@ public class DefaultNamespaceHandlerResolver implements NamespaceHandlerResolver
 
 	/**
 	 * Load the specified NamespaceHandler mappings lazily.
+	 * 加载具体的 NamespaceHandler
 	 */
 	private Map<String, Object> getHandlerMappings() {
 		Map<String, Object> handlerMappings = this.handlerMappings;
@@ -160,6 +161,7 @@ public class DefaultNamespaceHandlerResolver implements NamespaceHandlerResolver
 						logger.debug("Loading NamespaceHandler mappings from [" + this.handlerMappingsLocation + "]");
 					}
 					try {
+						// 从 META-INFO/spring.handlers 中获取命名控件处理器
 						Properties mappings =
 								PropertiesLoaderUtils.loadAllProperties(this.handlerMappingsLocation, this.classLoader);
 						if (logger.isDebugEnabled()) {

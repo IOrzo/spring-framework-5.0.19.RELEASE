@@ -94,7 +94,7 @@ import org.springframework.util.StringUtils;
  *
  * <p>Note: A default AutowiredAnnotationBeanPostProcessor will be registered
  * by the "context:annotation-config" and "context:component-scan" XML tags.
- * Remove or turn off the default annotation configuration there if you intend
+ * Remove or turn off the default annotation configuration there if you intend(打算)
  * to specify a custom AutowiredAnnotationBeanPostProcessor bean definition.
  * <p><b>NOTE:</b> Annotation injection will be performed <i>before</i> XML injection;
  * thus the latter configuration will override the former for properties wired through

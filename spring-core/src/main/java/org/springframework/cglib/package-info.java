@@ -9,5 +9,7 @@
  *
  * <p>As this repackaging happens at the class file level, sources
  * and javadocs are not available here.
+ *
+ * 重新打包CGLIB 3.2, 内部使用, 避免版本冲突
  */
 package org.springframework.cglib;

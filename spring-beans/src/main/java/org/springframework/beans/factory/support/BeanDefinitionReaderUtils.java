@@ -148,7 +148,7 @@ public class BeanDefinitionReaderUtils {
 			throws BeanDefinitionStoreException {
 
 		// Register bean definition under primary name.
-		// 使用 beanNarne 做唯一标识注册
+		// 使用 beanName 做唯一标识注册
 		String beanName = definitionHolder.getBeanName();
 		/**
 		 * @see DefaultListableBeanFactory#registerBeanDefinition(String, BeanDefinition)

@@ -141,10 +141,14 @@ public abstract class AbstractBeanFactory extends FactoryBeanRegistrySupport imp
 	/** Custom PropertyEditorRegistrars to apply to the beans of this factory */
 	private final Set<PropertyEditorRegistrar> propertyEditorRegistrars = new LinkedHashSet<>(4);
 
-	/** Custom PropertyEditors to apply to the beans of this factory */
+	/** Custom PropertyEditors to apply to the beans of this factory
+	 * 	自定义 PropertyEditors 属性编辑器
+	 * */
 	private final Map<Class<?>, Class<? extends PropertyEditor>> customEditors = new HashMap<>(4);
 
-	/** A custom TypeConverter to use, overriding the default PropertyEditor mechanism */
+	/** A custom TypeConverter to use, overriding the default PropertyEditor mechanism
+	 *  自定义 TypeConverter 类型转化器
+	 * */
 	@Nullable
 	private TypeConverter typeConverter;
 
@@ -319,7 +323,7 @@ public abstract class AbstractBeanFactory extends FactoryBeanRegistrySupport imp
 			}
 
 			try {
-				// 将存储XML配置文件的GernericBeanDefinition转换为RootBeanDefinition,如果指定
+				// 将存储XML配置文件的GenericBeanDefinition转换为RootBeanDefinition,如果指定
 				// BeanName是子Bean的话同时会合并父类的相关属性
 				RootBeanDefinition mbd = getMergedLocalBeanDefinition(beanName);
 				checkMergedBeanDefinition(mbd, beanName, args);
@@ -1200,6 +1204,8 @@ public abstract class AbstractBeanFactory extends FactoryBeanRegistrySupport imp
 	 * <p>The default implementation delegates to {@link #registerCustomEditors}.
 	 * Can be overridden in subclasses.
 	 * @param bw the BeanWrapper to initialize
+	 *
+	 * 使用自定义属性编辑器初始化 BeanWrapper
 	 */
 	protected void initBeanWrapper(BeanWrapper bw) {
 		bw.setConversionService(getConversionService());

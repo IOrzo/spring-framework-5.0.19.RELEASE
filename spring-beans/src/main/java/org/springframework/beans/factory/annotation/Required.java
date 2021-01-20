@@ -31,6 +31,8 @@ import java.lang.annotation.Target;
  * @author Rob Harrop
  * @since 2.0
  * @see RequiredAnnotationBeanPostProcessor
+ *
+ * 一般用在方法上面，表示该方法的参数必须能通过配置或者自动装载来填充。通常如果某个属性是必须的，我们会使用这个注解
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.METHOD)

@@ -31,6 +31,8 @@ import org.springframework.util.ConcurrentReferenceHashMap;
  * @since 4.2
  * @see #isWorthTrying()
  * @see #newInstance(Class, boolean)
+ *
+ * 实例化一个特定类的新对象
  */
 public class SpringObjenesis implements Objenesis {
 
@@ -81,6 +83,7 @@ public class SpringObjenesis implements Objenesis {
 	 * <p>If the configured Objenesis instantiator strategy has been identified to not
 	 * work on the current JVM at all or if the "spring.objenesis.ignore" property has
 	 * been set to "true", this method returns {@code false}.
+	 * 是否值得尝试
 	 */
 	public boolean isWorthTrying() {
 		return (this.worthTrying != Boolean.FALSE);

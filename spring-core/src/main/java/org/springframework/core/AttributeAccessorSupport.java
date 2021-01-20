@@ -30,6 +30,8 @@ import org.springframework.util.StringUtils;
  *
  * <p>{@link Serializable} if subclasses and all attribute values are {@link Serializable}.
  *
+ * 对AttributeAccessor接口提供基础实现, 可通过子类扩展
+ *
  * @author Rob Harrop
  * @author Juergen Hoeller
  * @since 2.0
@@ -81,6 +83,7 @@ public abstract class AttributeAccessorSupport implements AttributeAccessor, Ser
 	/**
 	 * Copy the attributes from the supplied AttributeAccessor to this accessor.
 	 * @param source the AttributeAccessor to copy from
+	 * 从指定的属性存取器中赋值属性
 	 */
 	protected void copyAttributesFrom(AttributeAccessor source) {
 		Assert.notNull(source, "Source must not be null");

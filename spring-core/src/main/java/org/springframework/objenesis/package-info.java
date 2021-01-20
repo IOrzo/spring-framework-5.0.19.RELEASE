@@ -3,7 +3,7 @@
  * <a href="http://objenesis.org">Objenesis 2.6</a>
  * (with SpringObjenesis entry point; for internal use only).
  *
- * <p>This repackaging technique avoids any potential conflicts with
+ * <p>This repackaging(重新包装) technique avoids any potential(潜在) conflicts with
  * dependencies on different Objenesis versions at the application
  * level or from third-party libraries and frameworks.
  *

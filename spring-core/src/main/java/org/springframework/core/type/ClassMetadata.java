@@ -19,8 +19,8 @@ package org.springframework.core.type;
 import org.springframework.lang.Nullable;
 
 /**
- * Interface that defines abstract metadata of a specific class,
- * in a form that does not require that class to be loaded yet.
+ * Interface that defines abstract metadata of a specific class(定义特定类的抽象元数据的接口),
+ * in a form that does not require that class to be loaded yet.(以不需要加载该类的形式)
  *
  * @author Juergen Hoeller
  * @since 2.5
@@ -54,6 +54,9 @@ public interface ClassMetadata {
 	/**
 	 * Return whether the underlying class represents a concrete class,
 	 * i.e. neither an interface nor an abstract class.
+	 *
+	 * 返回基础类是否代表具体类
+	 * 例: 不是接口和抽象类
 	 */
 	boolean isConcrete();
 
@@ -66,6 +69,9 @@ public interface ClassMetadata {
 	 * Determine whether the underlying class is independent, i.e. whether
 	 * it is a top-level class or a nested class (static inner class) that
 	 * can be constructed independently from an enclosing class.
+	 *
+	 * 是否独立
+	 * 例: 顶层类、静态内部类
 	 */
 	boolean isIndependent();
 
@@ -75,6 +81,9 @@ public interface ClassMetadata {
 	 * local class within a method).
 	 * <p>If this method returns {@code false}, then the underlying
 	 * class is a top-level class.
+	 *
+	 * 基础类是否是封闭类
+	 * 例: 内部类、嵌套类、方法中类
 	 */
 	boolean hasEnclosingClass();
 

@@ -47,6 +47,9 @@ import org.springframework.util.StringUtils;
  * resolving values contained in bean definition objects
  * into the actual values applied to the target bean instance.
  *
+ * 使用在factory接口中的帮助类, 用来解析bean definition属性值,
+ * 使真正的属性运用到实例中
+ *
  * <p>Operates on an {@link AbstractBeanFactory} and a plain
  * {@link org.springframework.beans.factory.config.BeanDefinition} object.
  * Used by {@link AbstractAutowireCapableBeanFactory}.

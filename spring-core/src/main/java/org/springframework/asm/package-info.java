@@ -9,5 +9,7 @@
  *
  * <p>As this repackaging happens at the class file level, sources
  * and javadocs are not available here.
+ *
+ * 重新打包ASM, 避免版本冲突
  */
 package org.springframework.asm;

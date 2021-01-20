@@ -39,15 +39,7 @@ import java.util.function.Supplier;
 
 import org.apache.commons.logging.Log;
 
-import org.springframework.beans.BeanUtils;
-import org.springframework.beans.BeanWrapper;
-import org.springframework.beans.BeanWrapperImpl;
-import org.springframework.beans.BeansException;
-import org.springframework.beans.MutablePropertyValues;
-import org.springframework.beans.PropertyAccessorUtils;
-import org.springframework.beans.PropertyValue;
-import org.springframework.beans.PropertyValues;
-import org.springframework.beans.TypeConverter;
+import org.springframework.beans.*;
 import org.springframework.beans.factory.Aware;
 import org.springframework.beans.factory.BeanClassLoaderAware;
 import org.springframework.beans.factory.BeanCreationException;
@@ -1456,7 +1448,7 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
 		}
 
 		if (pvs != null) {
-			// 程序运行到这里，已经完成了对所有注人属性的获取,但是获取的属性是以PropertyValues
+			// 程序运行到这里，已经完成了对所有注入属性的获取,但是获取的属性是以PropertyValues
 			// 形式存在的，还并没有应用到已经实例化的bean中，这一工作是在applyPropertyValues中。
 			// 将属性应用到bean中
 			applyPropertyValues(beanName, mbd, bw, pvs);
@@ -1704,6 +1696,7 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
 			original = Arrays.asList(pvs.getPropertyValues());
 		}
 
+		// 获取自定义类型转化器
 		TypeConverter converter = getCustomTypeConverter();
 		if (converter == null) {
 			converter = bw;
