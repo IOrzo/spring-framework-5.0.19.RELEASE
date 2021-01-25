@@ -519,24 +519,24 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 	public void refresh() throws BeansException, IllegalStateException {
 		synchronized (this.startupShutdownMonitor) {
 			// Prepare this context for refreshing.
-			// 准备刷新的上下文环境
+			// 准备刷新的上下文环境, 设置属性值
 			prepareRefresh();
 
 			// Tell the subclass to refresh the internal bean factory.
-			// 初始化 BeanFactory, 并进行 XML 文件读取, 已经加载完 beanDefinition
+			// 告知子类初始化内部 BeanFactory, 已经加载完 beanDefinition
 			ConfigurableListableBeanFactory beanFactory = obtainFreshBeanFactory();
 
 			// Prepare the bean factory for use in this context.
-			// 对 BeanFactory 进行各种功能填充
+			// 对 BeanFactory 进行各种功能填充, 如: ClassLoader, 属性编辑器, 后期处理器
 			prepareBeanFactory(beanFactory);
 
 			try {
 				// Allows post-processing of the bean factory in context subclasses.
-				// 子类覆盖方法做额外的处理
+				// 允许在上下文子类中对bean工厂进行后处理
 				postProcessBeanFactory(beanFactory);
 
 				// Invoke factory processors registered as beans in the context.
-				// 激活各种 BeanFactory 处理器
+				// 激活各种 BeanFactoryPostProcessor 处理器
 				invokeBeanFactoryPostProcessors(beanFactory);
 
 				// Register bean processors that intercept bean creation.
@@ -661,6 +661,8 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 	 * Configure the factory's standard context characteristics,
 	 * such as the context's ClassLoader and post-processors.
 	 * @param beanFactory the BeanFactory to configure
+	 *
+	 * 配置工厂的标准上下文特征，例如上下文的ClassLoader和后处理器。
 	 */
 	protected void prepareBeanFactory(ConfigurableListableBeanFactory beanFactory) {
 		// Tell the internal bean factory to use the context's class loader etc.
@@ -698,6 +700,7 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 		beanFactory.registerResolvableDependency(ApplicationContext.class, this);
 
 		// Register early post-processor for detecting inner beans as ApplicationListeners.
+		// 注册早期的后处理器以将内部bean检测为ApplicationListeners
 		beanFactory.addBeanPostProcessor(new ApplicationListenerDetector(this));
 
 		// Detect a LoadTimeWeaver and prepare for weaving, if found.
@@ -741,7 +744,7 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 		// 执行 FactoryPostProcessor 后置处理器
 		PostProcessorRegistrationDelegate.invokeBeanFactoryPostProcessors(beanFactory, getBeanFactoryPostProcessors());
 
-		// Detect a LoadTimeWeaver and prepare for weaving, if found in the meantime
+		// Detect a LoadTimeWeaver and prepare for weaving, if found in the meantime 检测LoadTimeWeaver并准备编织（如果在此期间发现）
 		// (e.g. through an @Bean method registered by ConfigurationClassPostProcessor)
 		if (beanFactory.getTempClassLoader() == null && beanFactory.containsBean(LOAD_TIME_WEAVER_BEAN_NAME)) {
 			beanFactory.addBeanPostProcessor(new LoadTimeWeaverAwareProcessor(beanFactory));
@@ -1408,6 +1411,9 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 	 * @throws BeansException if initialization of the bean factory failed
 	 * @throws IllegalStateException if already initialized and multiple refresh
 	 * attempts are not supported
+	 * 子类必须实现这个方法来执行真正的配置加载。这个方法在其他初始化工作之前被 refresh() 方法执行,
+	 * 子类将创建一个新的bean工厂并保留对其的引用，或返回它持有的单个BeanFactory实例。在后一种情况下，
+	 * 如果多次刷新上下文，它将通常抛出IllegalStateException。
 	 */
 	protected abstract void refreshBeanFactory() throws BeansException, IllegalStateException;
 
@@ -1415,6 +1421,8 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 	 * Subclasses must implement this method to release their internal bean factory.
 	 * This method gets invoked by {@link #close()} after all other shutdown work.
 	 * <p>Should never throw an exception but rather log shutdown failures.
+	 * 子类必须实现这个方法来释放内部的 bean factory。 这个方法在其他关闭工作之后被 close() 执行。
+	 * 永远不要抛出异常，而应该记录关闭失败
 	 */
 	protected abstract void closeBeanFactory();
 

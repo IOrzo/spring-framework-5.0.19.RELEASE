@@ -35,6 +35,9 @@ import org.springframework.util.StringUtils;
  * @see #setConfigLocation
  * @see #setConfigLocations
  * @see #getDefaultConfigLocations
+ *
+ * AbstractRefreshableApplicationContext子类，它添加了对指定配置位置的通用处理。用作基于XML的应用程序上下文的基类。
+ * 实现类有 ClassPathXmlApplicationContext 和 FileSystemXmlApplicationContext 以及 XmlWebApplicationContext。
  */
 public abstract class AbstractRefreshableConfigApplicationContext extends AbstractRefreshableApplicationContext
 		implements BeanNameAware, InitializingBean {
@@ -148,6 +151,8 @@ public abstract class AbstractRefreshableConfigApplicationContext extends Abstra
 	/**
 	 * Triggers {@link #refresh()} if not refreshed in the concrete context's
 	 * constructor already.
+	 *
+	 * 如果尚未在具体上下文的构造函数中刷新，则触发 refresh()。
 	 */
 	@Override
 	public void afterPropertiesSet() {
