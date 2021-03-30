@@ -38,6 +38,9 @@ import org.springframework.util.Assert;
  * This is an alternative to {@link ClassPathBeanDefinitionScanner}, applying
  * the same resolution of annotations but for explicitly registered classes only.
  *
+ * 	方便的适配器，用于以编程方式注册带注释的Bean类. 这是ClassPathBeanDefinitionScanner替代类,
+ * 	是相同的注解解析方案，但仅适用于显式注册的类
+ *
  * @author Juergen Hoeller
  * @author Chris Beams
  * @author Sam Brannen
@@ -84,7 +87,7 @@ public class AnnotatedBeanDefinitionReader {
 		Assert.notNull(environment, "Environment must not be null");
 		this.registry = registry;
 		this.conditionEvaluator = new ConditionEvaluator(registry, environment, null);
-		// 注册注解配置处理器
+		// 注册注解配置处理器 -> 系统默认的内部 BeanDefinitionRegistryPostProcessor 处理器, 属于 BeanFactoryPostProcessor
 		AnnotationConfigUtils.registerAnnotationConfigProcessors(this.registry);
 	}
 
