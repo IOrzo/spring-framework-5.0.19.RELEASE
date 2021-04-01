@@ -1,13 +1,14 @@
 package xx.annotation;
 
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 /**
  * @author xie yuan bing
  * @date 2021-01-20 14:49
  * @description
  */
-@Component
+@Service
 public class AnnotationEntityTest {
 
 	private String username;

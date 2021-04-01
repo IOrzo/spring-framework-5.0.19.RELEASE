@@ -54,7 +54,7 @@ import org.springframework.util.StringUtils;
  * @see RootBeanDefinition
  * @see ChildBeanDefinition
  *
- *    BeanDefinition是一个接口，在Spring中存在三种实现: RootBeanDefinition、 ChildBean-Definition
+ *    BeanDefinition是一个接口，在Spring中存在三种实现: RootBeanDefinition、 ChildBeanDefinition
  * 以及GenericBeanDefinition。 三种实现均继承了AbstractBeanDefinition， 其中BeanDefinition是配置
  * 文件<bean>元素标签在容器中的内部表示形式。<bean>元素标签拥有class、scope、lazy-init 等配置属性，
  * BeanDefinition 则提供了相应的beanClass、scope 、lazyInit属性，BeanDefinition 和<bean>中的属性
@@ -64,7 +64,7 @@ import org.springframework.util.StringUtils;
  * 而没有父<bean>的<bean>就使用RootBeanDefinition表示。AbstractBeanDefinition对两者共同的类信息进行抽象。
  *    Spring通过BeanDefinition 将配置文件中的<bean>配置信息转换为容器的内部表示，并将这些BeanDefiniton注册到
  * BeanDefinitonRegistry中。Spring容器的BeanDefinitionRegstry就像是Spring配置信息的内存数据库，主要是以
- * map的形式保存，后续操作直接从BeanDefinition-Registry中读取配置信息。
+ * map的形式保存，后续操作直接从BeanDefinitionRegistry中读取配置信息。
  */
 @SuppressWarnings("serial")
 public abstract class AbstractBeanDefinition extends BeanMetadataAttributeAccessor

@@ -478,7 +478,7 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
 
 		try {
 			// Give BeanPostProcessors a chance to return a proxy instead of the target bean instance.
-			// 给 BeanPostProcessors 一个机会来返回代理来替代真正的实例
+			// 给 BeanPostProcessors 一个机会来返回代理来替代真正的实例, 如: AOP(AnnotationAwareAspectJAutoProxyCreator)
 			Object bean = resolveBeforeInstantiation(beanName, mbdToUse);
 			if (bean != null) {
 				return bean;
@@ -1343,7 +1343,7 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
 	 * @return a BeanWrapper for the new instance
 	 */
 	/**
-	 * 对于实例的创建Spring 中分成了两种情况，-一种是通用的实例化，另一种是带有参数的实例
+	 * 对于实例的创建Spring 中分成了两种情况，一种是通用的实例化，另一种是带有参数的实例
 	 * 化。带有参数的实例化过程相当复杂，因为存在着不确定性,所以在判断对应参数上做了大量工作。
 	 */
 	protected BeanWrapper autowireConstructor(

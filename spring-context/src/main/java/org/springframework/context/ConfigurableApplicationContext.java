@@ -157,6 +157,9 @@ public interface ConfigurableApplicationContext extends ApplicationContext, Life
 	 * @throws BeansException if the bean factory could not be initialized
 	 * @throws IllegalStateException if already initialized and multiple refresh
 	 * attempts are not supported
+	 * 加载或刷新配置的持久性表示形式，它可能来自基于Java的配置，XML文件，属性文件，关系数据库模式或其他格式。
+	 * 由于这是一种启动方法，因此，如果失败，则应销毁已创建的单例，以避免资源悬空。换句话说，在调用此方法之后，
+	 * 应该实例化所有单例或根本不实例化。
 	 */
 	void refresh() throws BeansException, IllegalStateException;
 
