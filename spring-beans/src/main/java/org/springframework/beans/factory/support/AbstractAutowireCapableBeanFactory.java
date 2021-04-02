@@ -478,7 +478,7 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
 
 		try {
 			// Give BeanPostProcessors a chance to return a proxy instead of the target bean instance.
-			// 给 BeanPostProcessors 一个机会来返回代理来替代真正的实例, 如: AOP(AnnotationAwareAspectJAutoProxyCreator)
+			// 给 BeanPostProcessors 一个机会来返回代理来替代真正的实例 (对于AOP创建代理 -> Create proxy here if we have a custom TargetSource)
 			Object bean = resolveBeforeInstantiation(beanName, mbdToUse);
 			if (bean != null) {
 				return bean;
@@ -1824,7 +1824,7 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
 					beanName, "Invocation of init method failed", ex);
 		}
 		if (mbd == null || !mbd.isSynthetic()) {
-			// 后处理器应用
+			// 后处理器应用, 如: 一般情况(自定义切面), AOP(AnnotationAwareAspectJAutoProxyCreator)在这里进行动态织入
 			wrappedBean = applyBeanPostProcessorsAfterInitialization(wrappedBean, beanName);
 		}
 
