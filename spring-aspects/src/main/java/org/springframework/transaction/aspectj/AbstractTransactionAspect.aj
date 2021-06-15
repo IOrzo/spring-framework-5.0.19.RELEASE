@@ -91,8 +91,8 @@ public abstract aspect AbstractTransactionAspect extends TransactionAspectSuppor
 
 
 	/**
-	 * Ugly but safe workaround: We need to be able to propagate checked exceptions,
-	 * despite AspectJ around advice supporting specifically declared exceptions only.
+	 * Ugly but safe workaround: We need to be able to propagate(传播) checked exceptions,
+	 * despite(尽管) AspectJ around advice supporting specifically declared exceptions only.
 	 */
 	private static class Rethrower {
 

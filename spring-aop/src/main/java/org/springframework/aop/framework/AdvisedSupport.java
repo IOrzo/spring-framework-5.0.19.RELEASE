@@ -52,7 +52,7 @@ import org.springframework.util.CollectionUtils;
  * methods, which are provided by subclasses.
  *
  * <p>This class is serializable; subclasses need not be.
- * This class is used to hold snapshots of proxies.
+ * This class is used to hold snapshots of proxies.(此类用于保存代理的快照。)
  *
  * @author Rod Johnson
  * @author Juergen Hoeller
@@ -578,7 +578,7 @@ public class AdvisedSupport extends ProxyConfig implements Advised {
 
 	/**
 	 * Simple wrapper class around a Method. Used as the key when
-	 * caching methods, for efficient equals and hashCode comparisons.
+	 * caching methods, for efficient(高效的) equals and hashCode comparisons.
 	 */
 	private static final class MethodCacheKey implements Comparable<MethodCacheKey> {
 

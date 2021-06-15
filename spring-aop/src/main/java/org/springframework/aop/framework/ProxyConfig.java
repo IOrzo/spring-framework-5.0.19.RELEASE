@@ -22,7 +22,7 @@ import org.springframework.util.Assert;
 
 /**
  * Convenience superclass for configuration used in creating proxies,
- * to ensure that all proxy creators have consistent properties.
+ * to ensure that all proxy creators have consistent(一致的) properties.
  *
  * @author Rod Johnson
  * @author Juergen Hoeller
@@ -38,6 +38,9 @@ public class ProxyConfig implements Serializable {
 
 	private boolean optimize = false;
 
+	/**
+	 * 不透明
+	 */
 	boolean opaque = false;
 
 	boolean exposeProxy = false;

@@ -15,7 +15,7 @@ import org.springframework.stereotype.Component;
 @Aspect
 public class PrintAspect {
 
-	@Pointcut(value = "execution(public void xx.annotation.AopService.service())")
+	@Pointcut(value = "execution(public void xx.annotation.*.service())")
 	public void printPointCut(){}
 
 

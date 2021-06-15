@@ -268,7 +268,7 @@ public abstract class AbstractBeanFactory extends FactoryBeanRegistrySupport imp
 		 * 就会将创建bean的objectFactory提早曝光, 也就是将objectFactory加入到缓存中，
 		 * 一旦下个bean创建时候需要依赖上个bean则直接使用objectFactory
 		 */
-		// 直接尝试从singletonObjects缓存获取或者singletonFactories中的objectFactory中获取
+		// 直接尝试从singletonObjects缓存获取, 若 Bean 是第一次获取, 还没有被创建, 直接返回 null
 		Object sharedInstance = getSingleton(beanName);
 		if (sharedInstance != null && args == null) {
 			if (logger.isDebugEnabled()) {

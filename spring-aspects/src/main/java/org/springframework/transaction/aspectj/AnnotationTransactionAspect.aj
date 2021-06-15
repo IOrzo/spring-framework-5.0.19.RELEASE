@@ -29,7 +29,7 @@ import org.springframework.transaction.annotation.Transactional;
  * interfaces are <i>not</i> inherited.
  *
  * <p>An @Transactional annotation on a class specifies the default transaction
- * semantics for the execution of any <b>public</b> operation in the class.
+ * semantics(语义学) for the execution of any <b>public</b> operation in the class.
  *
  * <p>An @Transactional annotation on a method within the class overrides the
  * default transaction semantics given by the class annotation (if present).
