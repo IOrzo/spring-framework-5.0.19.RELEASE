@@ -479,6 +479,8 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
 		try {
 			// Give BeanPostProcessors a chance to return a proxy instead of the target bean instance.
 			// 给 BeanPostProcessors 一个机会来返回代理来替代真正的实例 (对于AOP创建代理 -> Create proxy here if we have a custom TargetSource)
+			// 对应 AbstractAutoProxyCreator 中的 TargetSourceCreator[] customTargetSourceCreators 变量
+			// 重点: 一般来说，这里不会返回 AOP 代理对象，会在后续中的 BeanPostProcessor 或者 getEarlyBeanReference() 中创建
 			Object bean = resolveBeforeInstantiation(beanName, mbdToUse);
 			if (bean != null) {
 				return bean;

@@ -408,7 +408,7 @@ public abstract class AbstractAutoProxyCreator extends ProxyProcessorSupport
 	 */
 	@Nullable
 	protected TargetSource getCustomTargetSource(Class<?> beanClass, String beanName) {
-		// We can't create fancy target sources for directly registered singletons.
+		// We can't create fancy(花式的) target sources for directly registered singletons. 对于直接注册的 bean 我们无法创建目标源
 		if (this.customTargetSourceCreators != null &&
 				this.beanFactory != null && this.beanFactory.containsBean(beanName)) {
 			for (TargetSourceCreator tsc : this.customTargetSourceCreators) {
