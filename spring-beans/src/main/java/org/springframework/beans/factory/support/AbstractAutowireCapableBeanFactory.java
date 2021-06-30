@@ -1085,8 +1085,8 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
 				Class<?> targetType = determineTargetType(beanName, mbd);
 				/**
 				 * applyBeanPostProcessorsBeforeInstantiation 以及 applyBeanPostProcessorsAfterInitialization 这两个方法
-				 * 是对后处理器中的所有InstantiationAwareBeanPostProcessor类型的后处理器进行postProcessBeforeInstantiation
-				 * 方法和BeanPostProcessor的postProcessAfterInitialization 方法的调用。
+				 * 是对后处理器中的所有 InstantiationAwareBeanPostProcessor 类型的后处理器进行 postProcessBeforeInstantiation
+				 * 方法和 BeanPostProcessor的 postProcessAfterInitialization 方法的调用。
 				 */
 				if (targetType != null) {
 					bean = applyBeanPostProcessorsBeforeInstantiation(targetType, beanName);
@@ -1389,7 +1389,7 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
 		// Give any InstantiationAwareBeanPostProcessors the opportunity to modify the
 		// state of the bean before properties are set. This can be used, for example,
 		// to support styles of field injection.
-		// 给InstantiationAwareBeanPostProcessors最后一次机会在属性设置前来改变bean
+		// 给 InstantiationAwareBeanPostProcessors 最后一次机会在属性设置前来改变bean
 		// 如:可以用来支持属性注入的类型
 		if (!mbd.isSynthetic() && hasInstantiationAwareBeanPostProcessors()) {
 			for (BeanPostProcessor bp : getBeanPostProcessors()) {

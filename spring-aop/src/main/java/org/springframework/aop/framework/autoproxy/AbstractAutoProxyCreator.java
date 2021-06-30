@@ -249,7 +249,7 @@ public abstract class AbstractAutoProxyCreator extends ProxyProcessorSupport
 			if (this.advisedBeans.containsKey(cacheKey)) {
 				return null;
 			}
-			if (isInfrastructureClass(beanClass) || shouldSkip(beanClass, beanName)) {
+			if (isInfrastructureClass(beanClass) || shouldSkip(beanClass, beanName)) { // shouldSkip 中会加载切面信息
 				this.advisedBeans.put(cacheKey, Boolean.FALSE);
 				return null;
 			}
@@ -347,10 +347,10 @@ public abstract class AbstractAutoProxyCreator extends ProxyProcessorSupport
 		}
 
 		// Create proxy if we have advice.
-		Object[] specificInterceptors = getAdvicesAndAdvisorsForBean(bean.getClass(), beanName, null);
+		Object[] specificInterceptors = getAdvicesAndAdvisorsForBean(bean.getClass(), beanName, null); // 获取匹配的切面
 		if (specificInterceptors != DO_NOT_PROXY) {
 			this.advisedBeans.put(cacheKey, Boolean.TRUE);
-			Object proxy = createProxy(
+			Object proxy = createProxy(  // 创建代理
 					bean.getClass(), beanName, specificInterceptors, new SingletonTargetSource(bean));
 			this.proxyTypes.put(cacheKey, proxy.getClass());
 			return proxy;
