@@ -39,7 +39,7 @@ import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Component;
 
 /**
- * Utilities for identifying @{@link Configuration} classes.
+ * Utilities for identifying(识别) @{@link Configuration} classes.
  *
  * @author Chris Beams
  * @author Juergen Hoeller
@@ -140,7 +140,7 @@ abstract class ConfigurationClassUtils {
 	}
 
 	/**
-	 * Check the given metadata for a full configuration class candidate
+	 * Check the given metadata for a full configuration class candidate 类上是否有 @Configuration 注解
 	 * (i.e. a class annotated with {@code @Configuration}).
 	 * @param metadata the metadata of the annotated class
 	 * @return {@code true} if the given class is to be processed as a full
@@ -151,7 +151,7 @@ abstract class ConfigurationClassUtils {
 	}
 
 	/**
-	 * Check the given metadata for a lite configuration class candidate
+	 * Check the given metadata for a lite configuration class candidate 检查类上是否有 @Component @ComponentScan @Import @ImportResource 和方法上 @Bean
 	 * (e.g. a class annotated with {@code @Component} or just having
 	 * {@code @Import} declarations or {@code @Bean methods}).
 	 * @param metadata the metadata of the annotated class

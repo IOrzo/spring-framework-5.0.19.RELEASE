@@ -1362,16 +1362,16 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
 	 * @param bw the BeanWrapper with bean instance
 	 */
 	/**
-	 * 在populateBean函数中提供了这样的处理流程。
-	 * 1. InstantiationAwareBeanPostProcessor 处理器的postProcessAfterInstantiation 函数的应用，
+	 * 在 populateBean 函数中提供了这样的处理流程。
+	 * 1. InstantiationAwareBeanPostProcessor 处理器的 postProcessAfterInstantiation 函数的应用，
 	 * 此函数可以控制程序是否继续进行属性填充。
-	 * 2.根据注人类型( byName/byType ),提取依赖的bean,并统一存入PropertyValues 中。
-	 * 3.应用InstantiationAwareBeanPostProcessor处理器的postProcessPropertyValues方法，对属性
-	 * 获取完毕填充前对属性的再次处理，典型应用是RequiredAnnotationBeanPostProcessor 类中对
+	 * 2.根据注人类型( byName/byType ),提取依赖的 bean,并统一存入 PropertyValues 中。
+	 * 3.应用 InstantiationAwareBeanPostProcessor 处理器的 postProcessPropertyValues 方法，对属性
+	 * 获取完毕填充前对属性的再次处理，典型应用是 RequiredAnnotationBeanPostProcessor 类中对
 	 * 属性的验证。
-	 * 4.将所有PropertyValues中的属性填充至BeanWrapper中。
+	 * 4.将所有 PropertyValues 中的属性填充至 BeanWrapper 中。
 	 * 在上面的步骤中有几个地方是我们比较感兴趣的，它们分别是依赖注人( autowire-
-	 * ByName/autowireByType )以及属性填充。
+	 * ByName/autowireByType ) 以及属性填充。
 	 */
 	protected void populateBean(String beanName, RootBeanDefinition mbd, @Nullable BeanWrapper bw) {
 		if (bw == null) {
@@ -1389,7 +1389,7 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
 		// Give any InstantiationAwareBeanPostProcessors the opportunity to modify the
 		// state of the bean before properties are set. This can be used, for example,
 		// to support styles of field injection.
-		// 给 InstantiationAwareBeanPostProcessors 最后一次机会在属性设置前来改变bean
+		// 给 InstantiationAwareBeanPostProcessors 最后一次机会在属性设置前来改变 bean
 		// 如:可以用来支持属性注入的类型
 		if (!mbd.isSynthetic() && hasInstantiationAwareBeanPostProcessors()) {
 			for (BeanPostProcessor bp : getBeanPostProcessors()) {

@@ -181,8 +181,8 @@ class ConstructorResolver {
 			}
 			// 如果缓存中存在
 			if (argsToResolve != null) {
-				// 解析参数类型，如给定方法的构造函数A (int, int)则通过此方法后就会把配置中的
-				// ("1", "1")转换为(1,1 )
+				// 解析参数类型，如给定方法的构造函数A (int, int) 则通过此方法后就会把配置中的
+				// ("1", "1") 转换为 (1, 1)
 				// 缓存中的值可能是原始值也可能是最终值
 				argsToUse = resolvePreparedArguments(beanName, mbd, bw, constructorToUse, argsToResolve);
 			}
@@ -222,7 +222,7 @@ class ConstructorResolver {
 							"] from ClassLoader [" + beanClass.getClassLoader() + "] failed", ex);
 				}
 			}
-			// 排序给定的构造函数，public构造函数优先参数数量降序、非public构造函数参数数量降序
+			// 排序给定的构造函数，public 构造函数优先参数数量降序、非 public 构造函数参数数量降序
 			AutowireUtils.sortConstructors(candidates);
 			int minTypeDiffWeight = Integer.MAX_VALUE;
 			Set<Constructor<?>> ambiguousConstructors = null;

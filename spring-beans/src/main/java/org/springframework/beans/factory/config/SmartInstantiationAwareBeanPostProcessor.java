@@ -38,7 +38,7 @@ import org.springframework.lang.Nullable;
 public interface SmartInstantiationAwareBeanPostProcessor extends InstantiationAwareBeanPostProcessor {
 
 	/**
-	 * Predict the type of the bean to be eventually returned from this
+	 * Predict(预测) the type of the bean to be eventually returned from this
 	 * processor's {@link #postProcessBeforeInstantiation} callback.
 	 * <p>The default implementation returns {@code null}.
 	 * @param beanClass the raw class of the bean
