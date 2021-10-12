@@ -25,4 +25,14 @@ public class AnnotationConfigApplicationContextTest {
 		AopService aopService = (AopService) context.getBean("aopService");
 		aopService.service();
 	}
+
+	/**
+	 * AOP 注解全流程
+	 */
+	@Test
+	public void testAnnotationAopALL() {
+		AopConfigApplicationContext context = new AopConfigApplicationContext("xx.annotation");
+		AllAspectService allAspectService = (AllAspectService) context.getBean("allAspectService");
+		allAspectService.exec();
+	}
 }

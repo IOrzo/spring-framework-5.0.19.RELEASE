@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class AopService {
 
-//	@Autowired
+	@Autowired
 	private DependencySetter dependencySetter;
 
 	public void service() {
