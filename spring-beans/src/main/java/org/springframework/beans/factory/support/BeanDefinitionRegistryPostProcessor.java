@@ -32,8 +32,8 @@ import org.springframework.beans.factory.config.BeanFactoryPostProcessor;
  */
 
 /**
- * BeanDefinitionRegistryPostProcessor 接口可以看作是BeanFactoryPostProcessor和ImportBeanDefinitionRegistrar的功能集合，
- * 既可以获取和修改BeanDefinition的元数据，也可以实现BeanDefinition的注册、移除等操作
+ * BeanDefinitionRegistryPostProcessor 接口可以看作是 BeanFactoryPostProcessor 和 ImportBeanDefinitionRegistrar 的功能集合，
+ * 既可以获取和修改 BeanDefinition 的元数据，也可以实现 BeanDefinition 的注册、移除等操作
  */
 public interface BeanDefinitionRegistryPostProcessor extends BeanFactoryPostProcessor {
 

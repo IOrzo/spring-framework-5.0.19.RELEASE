@@ -285,7 +285,7 @@ public abstract class TransactionAspectSupport implements BeanFactoryAware, Init
 		final String joinpointIdentification = methodIdentification(method, targetClass, txAttr);
 
 		if (txAttr == null || !(tm instanceof CallbackPreferringPlatformTransactionManager)) {
-			// Standard transaction demarcation with getTransaction and commit/rollback calls. 使用 getTransaction 和 commit/rollback 调用进行标准事务划分。
+			// Standard transaction demarcation(划界) with getTransaction and commit/rollback calls. 使用 getTransaction 和 commit/rollback 调用进行标准事务划分。
 			TransactionInfo txInfo = createTransactionIfNecessary(tm, txAttr, joinpointIdentification);
 
 			Object retVal;
@@ -473,7 +473,7 @@ public abstract class TransactionAspectSupport implements BeanFactoryAware, Init
 		TransactionStatus status = null;
 		if (txAttr != null) {
 			if (tm != null) {
-				status = tm.getTransaction(txAttr);
+				status = tm.getTransaction(txAttr); // 开启事务, 设置为手动提交
 			}
 			else {
 				if (logger.isDebugEnabled()) {

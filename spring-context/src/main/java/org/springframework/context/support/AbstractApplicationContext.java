@@ -532,7 +532,7 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 
 			try {
 				// Allows post-processing of the bean factory in context subclasses.
-				// 允许在上下文子类对bean工厂进行后处理
+				// 允许在上下文子类对 bean factory 进行处理
 				postProcessBeanFactory(beanFactory);
 
 				// Invoke factory processors registered as beans in the context.
@@ -728,7 +728,7 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 	 * Modify the application context's internal bean factory after its standard
 	 * initialization. All bean definitions will have been loaded, but no beans
 	 * will have been instantiated yet. This allows for registering special
-	 * BeanPostProcessors etc in certain ApplicationContext implementations.
+	 * BeanPostProcessors etc in certain(某些的) ApplicationContext implementations.
 	 * @param beanFactory the bean factory used by the application context
 	 */
 	protected void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory) {
@@ -1412,8 +1412,8 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 	 * @throws IllegalStateException if already initialized and multiple refresh
 	 * attempts are not supported
 	 * 子类必须实现这个方法来执行真正的配置加载。这个方法在其他初始化工作之前被 refresh() 方法执行,
-	 * 子类将创建一个新的bean工厂并保留对其的引用，或返回它持有的单个BeanFactory实例。在后一种情况下，
-	 * 如果多次刷新上下文，它将通常抛出IllegalStateException。
+	 * 子类将创建一个新的 bean 工厂并保留对其的引用，或返回它持有的单个 BeanFactory 实例。在后一种情况下，
+	 * 如果多次刷新上下文，它将通常抛出 IllegalStateException。
 	 */
 	protected abstract void refreshBeanFactory() throws BeansException, IllegalStateException;
 

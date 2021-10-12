@@ -28,7 +28,7 @@ import org.springframework.beans.factory.config.BeanPostProcessor;
  * the bean definition in order to prepare some cached metadata before post-processing
  * actual instances of a bean. It is also allowed to modify the bean definition but
  * <i>only</i> for definition properties which are actually intended for concurrent
- * modification. Essentially, this only applies to operations defined on the
+ * modification. Essentially(本质上), this only applies to operations defined on the
  * {@link RootBeanDefinition} itself but not to the properties of its base classes.
  *
  * @author Juergen Hoeller
