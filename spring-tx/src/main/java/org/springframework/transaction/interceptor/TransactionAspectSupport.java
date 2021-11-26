@@ -279,7 +279,7 @@ public abstract class TransactionAspectSupport implements BeanFactoryAware, Init
 			final InvocationCallback invocation) throws Throwable {
 
 		// If the transaction attribute is null, the method is non-transactional.
-		TransactionAttributeSource tas = getTransactionAttributeSource();
+		TransactionAttributeSource tas = getTransactionAttributeSource(); // 实现是 AnnotationTransactionAttributeSource
 		final TransactionAttribute txAttr = (tas != null ? tas.getTransactionAttribute(method, targetClass) : null);
 		final PlatformTransactionManager tm = determineTransactionManager(txAttr);
 		final String joinpointIdentification = methodIdentification(method, targetClass, txAttr);
@@ -594,7 +594,7 @@ public abstract class TransactionAspectSupport implements BeanFactoryAware, Init
 
 
 	/**
-	 * Opaque object used to hold transaction information. Subclasses
+	 * Opaque(不透明的) object used to hold transaction information. Subclasses
 	 * must pass it back to methods on this class, but not see its internals.
 	 */
 	protected final class TransactionInfo {

@@ -160,7 +160,7 @@ public class ProxyConfig implements Serializable {
 		this.optimize = other.optimize;
 		this.exposeProxy = other.exposeProxy;
 		this.frozen = other.frozen;
-		this.opaque = other.opaque;
+		this.opaque = other.opaque; // 不透明
 	}
 
 	@Override

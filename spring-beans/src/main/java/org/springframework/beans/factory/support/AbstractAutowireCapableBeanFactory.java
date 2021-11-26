@@ -574,7 +574,7 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
 		synchronized (mbd.postProcessingLock) {
 			if (!mbd.postProcessed) {
 				try {
-					// 应用 MergedBeanDefinitionPostProcessor
+					// 应用 MergedBeanDefinitionPostProcessor，在对实例化 bean 后置处理之前缓存一些元数据
 					// bean 合并后的处理, Autowired 注解正式通过此方法实现诸如类型的预解析
 					applyMergedBeanDefinitionPostProcessors(mbd, beanType, beanName);
 				}
@@ -640,9 +640,9 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
 						}
 					}
 					/**
-					 * 因为bean创建后其所依赖的bean一定是已经创建的，
-					 * actualDependentBeans不为空则表示当前bean创建后其依赖的bean却没有没
-					 * 全部创建完，也就是说存在循环依赖
+					 * 因为 bean 创建后其所依赖的 bean 一定是已经创建的，
+					 * actualDependentBeans 不为空则表示当前 bean 创建后其依赖的 bean 却没有全部创建完，
+					 * 也就是说存在循环依赖
 					 */
 					if (!actualDependentBeans.isEmpty()) {
 						throw new BeanCurrentlyInCreationException(beanName,
@@ -1450,9 +1450,9 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
 		}
 
 		if (pvs != null) {
-			// 程序运行到这里，已经完成了对所有注入属性的获取,但是获取的属性是以PropertyValues
-			// 形式存在的，还并没有应用到已经实例化的bean中，这一工作是在applyPropertyValues中。
-			// 将属性应用到bean中
+			// 程序运行到这里，已经完成了对所有注入属性的获取,但是获取的属性是以 PropertyValues
+			// 形式存在的，还并没有应用到已经实例化的 bean 中，这一工作是在 applyPropertyValues 中。
+			// 将属性应用到 bean 中
 			applyPropertyValues(beanName, mbd, bw, pvs);
 		}
 	}
@@ -1679,7 +1679,7 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
 
 		if (pvs instanceof MutablePropertyValues) {
 			mpvs = (MutablePropertyValues) pvs;
-			// 如果 mpvs 中的值已经被转换为对应的类型那么可以直接设置到beanWrapper中
+			// 如果 mpvs 中的值已经被转换为对应的类型那么可以直接设置到 beanWrapper 中
 			if (mpvs.isConverted()) {
 				// Shortcut: use the pre-converted values as-is.
 				try {
@@ -1691,7 +1691,7 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
 							mbd.getResourceDescription(), beanName, "Error setting property values", ex);
 				}
 			}
-			// 如果pvs并不是使用MutablePropertyValues封装的类型，那么直接使用原始的属性获取方法
+			// 如果 pvs 并不是使用 MutablePropertyValues 封装的类型，那么直接使用原始的属性获取方法
 			original = mpvs.getPropertyValueList();
 		}
 		else {
@@ -1816,8 +1816,7 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
 
 		try {
 			// 激活用户自定义的 init 方法
-			// 执行配置文件中 init-method 方法和 InitializingBean.afterPropertiesSet方法
-			// 先执行 InitializingBean, 后置执行 init-method
+			// 先执行 InitializingBean.afterPropertiesSet 方法, 后执行配置文件中 init-method 方法
 			invokeInitMethods(beanName, wrappedBean, mbd);
 		}
 		catch (Throwable ex) {
@@ -1826,7 +1825,7 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
 					beanName, "Invocation of init method failed", ex);
 		}
 		if (mbd == null || !mbd.isSynthetic()) {
-			// 后处理器应用, 如: 一般情况(自定义切面), AOP(AnnotationAwareAspectJAutoProxyCreator)在这里进行动态织入
+			// 后处理器应用, 如: 一般情况(自定义切面), AOP(AnnotationAwareAspectJAutoProxyCreator) 在这里进行动态织入
 			wrappedBean = applyBeanPostProcessorsAfterInitialization(wrappedBean, beanName);
 		}
 
@@ -1865,7 +1864,7 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
 	protected void invokeInitMethods(String beanName, Object bean, @Nullable RootBeanDefinition mbd)
 			throws Throwable {
 
-		// 首先会检查是否是InitializingBean,如果是的话需要调用afterPropertiesSet方法
+		// 首先会检查是否是 InitializingBean, 如果是的话需要调用 afterPropertiesSet 方法
 		boolean isInitializingBean = (bean instanceof InitializingBean);
 		if (isInitializingBean && (mbd == null || !mbd.isExternallyManagedInitMethod("afterPropertiesSet"))) {
 			if (logger.isDebugEnabled()) {
