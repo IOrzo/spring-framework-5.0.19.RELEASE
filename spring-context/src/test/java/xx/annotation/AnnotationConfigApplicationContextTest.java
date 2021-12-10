@@ -32,7 +32,7 @@ public class AnnotationConfigApplicationContextTest {
 	@Test
 	public void testAnnotationAopALL() {
 		AopConfigApplicationContext context = new AopConfigApplicationContext("xx.annotation");
-		AllAspectService allAspectService = (AllAspectService) context.getBean("allAspectService");
+		Execution allAspectService = (Execution) context.getBean("allAspectService");
 		allAspectService.exec();
 	}
 }

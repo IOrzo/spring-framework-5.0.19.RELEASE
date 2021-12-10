@@ -70,8 +70,8 @@ final class JdkDynamicAopProxy implements AopProxy, InvocationHandler, Serializa
 	/*
 	 * NOTE: We could avoid the code duplication between this class and the CGLIB
 	 * proxies by refactoring "invoke" into a template method. However, this approach
-	 * adds at least 10% performance overhead versus a copy-paste solution, so we sacrifice
-	 * elegance for performance. (We have a good test suite to ensure that the different
+	 * adds at least 10% performance overhead versus（相对） a copy-paste solution, so we sacrifice（牺牲）
+	 * elegance（优雅） for performance. (We have a good test suite to ensure that the different
 	 * proxies behave the same :-)
 	 * This way, we can also more easily take advantage of minor optimizations in each class.
 	 */

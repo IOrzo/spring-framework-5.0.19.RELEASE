@@ -53,22 +53,22 @@ public class AllAspect {
 		System.out.println("Around  after AllAspect");
 	}
 
-	@Before(value = "pointCut()")
+//	@Before(value = "pointCut()")
 	public void before(JoinPoint jp) {
 		System.out.println("Before  AllAspect");
 	}
 
-	@After(value = "pointCut()")
+//	@After(value = "pointCut()")
 	public void after() {
 		System.out.println("After  AllAspect");
 	}
 
-	@AfterReturning(value = "pointCut()")
+//	@AfterReturning(value = "pointCut()")
 	public void afterReturning() {
 		System.out.println("AfterReturning  AllAspect");
 	}
 
-	@AfterThrowing(value = "pointCut()", throwing = "e")
+//	@AfterThrowing(value = "pointCut()", throwing = "e")
 	public void afterThrowing(JoinPoint jp, Exception e) {
 		System.out.println("AfterThrowing  AllAspect");
 	}

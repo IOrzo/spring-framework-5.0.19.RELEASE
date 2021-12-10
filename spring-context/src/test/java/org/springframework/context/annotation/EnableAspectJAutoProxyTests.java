@@ -16,6 +16,7 @@
 
 package org.springframework.context.annotation;
 
+import java.lang.annotation.Annotation;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
@@ -106,6 +107,11 @@ public class EnableAspectJAutoProxyTests {
 		sampleService.execute((SampleInputBean) null);
 	}
 
+	@Test
+	public void getAnnotationType() {
+		EnableAspectJAutoProxy annotation = ConfigWithJdkProxy.class.getAnnotation(EnableAspectJAutoProxy.class);
+		System.out.println(annotation.annotationType());
+	}
 
 	@ComponentScan("example.scannable")
 	@EnableAspectJAutoProxy

@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
  * @date 2021-04-02 15:04
  */
 @Component
-@Aspect
+//@Aspect
 public class PrintAspect {
 
 	@Pointcut(value = "execution(public void xx.annotation.*.service())")

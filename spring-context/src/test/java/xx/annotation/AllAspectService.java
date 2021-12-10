@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
  * @date 2021-10-12 10:33
  */
 @Component
-public class AllAspectService {
+public class AllAspectService implements Execution {
 
 
 	public void exec() {
