@@ -28,7 +28,7 @@ import org.springframework.aop.TargetSource;
  * Interceptors and other advice, Advisors, and the proxied interfaces.
  *
  * <p>Any AOP proxy obtained from Spring can be cast to this interface to
- * allow manipulation of its AOP advice.
+ * allow manipulation（操纵） of its AOP advice.
  *
  * @author Rod Johnson
  * @author Juergen Hoeller

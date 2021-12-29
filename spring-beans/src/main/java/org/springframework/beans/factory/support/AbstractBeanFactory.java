@@ -323,8 +323,8 @@ public abstract class AbstractBeanFactory extends FactoryBeanRegistrySupport imp
 			}
 
 			try {
-				// 将存储XML配置文件的GenericBeanDefinition转换为RootBeanDefinition,如果指定
-				// BeanName是子Bean的话同时会合并父类的相关属性
+				// 将存储 XML 配置文件的 GenericBeanDefinition 转换为 RootBeanDefinition，如果指定
+				// BeanName 是子 Bean 的话同时会合并父类的相关属性
 				RootBeanDefinition mbd = getMergedLocalBeanDefinition(beanName);
 				checkMergedBeanDefinition(mbd, beanName, args);
 

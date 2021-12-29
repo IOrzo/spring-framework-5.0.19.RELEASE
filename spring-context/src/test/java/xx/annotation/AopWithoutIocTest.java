@@ -12,7 +12,7 @@ import org.springframework.tests.sample.beans.ITestBean;
 import java.lang.reflect.Method;
 
 /**
- * 以编程方式创建 AOP 代理ProxyFactory
+ * 以编程方式创建 AOP 代理 ProxyFactory
  * @author xie yuan bing
  * @date 2021-11-26 15:14
  */

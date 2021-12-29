@@ -589,7 +589,7 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
 		// Eagerly cache singletons to be able to resolve circular references
 		// even when triggered by lifecycle interfaces like BeanFactoryAware.
 		/**
-		 * 是否需要提前曝光: 单例&允许循环依赖&当前 bean 正在创建中, 检测循环依赖
+		 * 是否需要提前曝光: 单例 & 允许循环依赖 & 当前 bean 正在创建中, 检测循环依赖
 		 */
 		boolean earlySingletonExposure = (mbd.isSingleton() && this.allowCircularReferences &&
 				isSingletonCurrentlyInCreation(beanName));
@@ -940,7 +940,7 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
 	 * @return the object to expose as bean reference
 	 */
 	/**
-	 *	对bean再一次依赖引用, 主要应用 SmartInstantiationAware BeanPostProcessor
+	 *	对 bean 再一次依赖引用, 主要应用 SmartInstantiationAware BeanPostProcessor
 	 *	其中我们熟知的 AOP 就是在这里将 advice 动态织入 bean 中, 若没有则直接返回 bean,
 	 *	不做任何处理
 	 */
@@ -1086,7 +1086,7 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
 				/**
 				 * applyBeanPostProcessorsBeforeInstantiation 以及 applyBeanPostProcessorsAfterInitialization 这两个方法
 				 * 是对后处理器中的所有 InstantiationAwareBeanPostProcessor 类型的后处理器进行 postProcessBeforeInstantiation
-				 * 方法和 BeanPostProcessor的 postProcessAfterInitialization 方法的调用。
+				 * 方法和 BeanPostProcessor 的 postProcessAfterInitialization 方法的调用。
 				 */
 				if (targetType != null) {
 					bean = applyBeanPostProcessorsBeforeInstantiation(targetType, beanName);
