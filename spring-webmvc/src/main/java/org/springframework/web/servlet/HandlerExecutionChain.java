@@ -29,7 +29,7 @@ import org.springframework.util.CollectionUtils;
 import org.springframework.util.ObjectUtils;
 
 /**
- * Handler execution chain, consisting of handler object and any handler interceptors.
+ * Handler execution chain, consisting（组成） of handler object and any handler interceptors.
  * Returned by HandlerMapping's {@link HandlerMapping#getHandler} method.
  *
  * @author Juergen Hoeller

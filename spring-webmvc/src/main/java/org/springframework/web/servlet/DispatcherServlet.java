@@ -63,11 +63,11 @@ import org.springframework.web.util.WebUtils;
 /**
  * Central dispatcher for HTTP request handlers/controllers, e.g. for web UI controllers
  * or HTTP-based remote service exporters. Dispatches to registered handlers for processing
- * a web request, providing convenient mapping and exception handling facilities.
+ * a web request, providing convenient mapping and exception handling facilities（设施）.
  *
- * <p>This servlet is very flexible: It can be used with just about any workflow, with the
+ * <p>This servlet is very flexible（灵活的）: It can be used with just about any workflow, with the
  * installation of the appropriate adapter classes. It offers the following functionality
- * that distinguishes it from other request-driven web MVC frameworks:
+ * that distinguishes（区分） it from other request-driven web MVC frameworks:
  *
  * <ul>
  * <li>It is based around a JavaBeans configuration mechanism.
