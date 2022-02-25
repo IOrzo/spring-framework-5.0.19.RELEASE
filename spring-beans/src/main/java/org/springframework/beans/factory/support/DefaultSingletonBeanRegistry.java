@@ -241,7 +241,7 @@ public class DefaultSingletonBeanRegistry extends SimpleAliasRegistry implements
 						// 调用预先设定的 getObject 方法 -> AbstractAutowireCapableBeanFactory#getEarlyBeanReference
 						singletonObject = singletonFactory.getObject();
 						// 记录在缓存中, earlySingletonObjects 和 singletonFactories 互斥
-						// earlySingletonObjects 存放着还没有创建完成, 却被其他bean引用的对象
+						// earlySingletonObjects 存放着还没有创建完成, 却被其他 bean 引用的对象
 						this.earlySingletonObjects.put(beanName, singletonObject);
 						this.singletonFactories.remove(beanName);
 					}

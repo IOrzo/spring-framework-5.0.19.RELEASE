@@ -249,12 +249,12 @@ public abstract class AbstractBeanFactory extends FactoryBeanRegistrySupport imp
 			throws BeansException {
 
 		/**
-		 * 或许很多人不理解转换对应beanName是什么意思，传人的参数name不就是beanName
-		 * 吗?其实不是，这里传入的参数可能是别名，也可能是FactoryBean, 所以需要进行一系列的
+		 * 或许很多人不理解转换对应 beanName是什么意思，传人的参数 name不就是 beanName 吗?
+		 * 其实不是，这里传入的参数可能是别名，也可能是 FactoryBean, 所以需要进行一系列的
 		 * 解析，这些解析内容包括如下内容。
-		 * 去除 FactoryBean的修饰符,也就是如果name "&aa",那么会首先去除&而使name="a"。
-		 * 取指定alias 所表示的最终beanName,例如别名A指向名称为B的bean则返回B;
-		 * 若别名A指向别名B,别名B又指向名称为C的bean则返回C。
+		 * 去除 FactoryBean 的修饰符,也就是如果 name="&a",那么会首先去除 & 而使 name="a"。
+		 * 取指定 alias 所表示的最终 beanName,例如别名 A 指向名称为 B 的 bean 则返回 B;
+		 * 若别名 A 指向别名 B,别名 B 又指向名称为 C 的 bean 则返回 C。
 		 */
 		// 提取对应的 beanName
 		String beanName = transformedBeanName(name);
@@ -268,7 +268,7 @@ public abstract class AbstractBeanFactory extends FactoryBeanRegistrySupport imp
 		 * 就会将创建bean的objectFactory提早曝光, 也就是将objectFactory加入到缓存中，
 		 * 一旦下个bean创建时候需要依赖上个bean则直接使用objectFactory
 		 */
-		// 直接尝试从singletonObjects缓存获取, 若 Bean 是第一次获取, 还没有被创建, 直接返回 null
+		// 直接尝试从 singletonObjects 缓存获取, 若 Bean 是第一次获取, 还没有被创建, 直接返回 null
 		Object sharedInstance = getSingleton(beanName);
 		if (sharedInstance != null && args == null) {
 			if (logger.isDebugEnabled()) {
@@ -288,9 +288,9 @@ public abstract class AbstractBeanFactory extends FactoryBeanRegistrySupport imp
 			// Fail if we're already creating this bean instance:
 			// We're assumably within a circular reference.
 			// 只有在单例情况才会尝试解决循环依赖，原型模式情况下，如果存在
-			// A中有B的属性, B中有A的属性，那么当依赖注入的时候，就会产生当A还未创建完的时候因为
-			// 对于B的创建再次返回创建A，造成循环依赖，也就是下面的情况
-			// isPrototypeCurrentlyInCreat ion (beanName)为true
+			// A 中有 B 的属性, B 中有 A 的属性，那么当依赖注入的时候，就会产生当 A 还未创建完的时候因为
+			// 对于 B 的创建再次返回创建 A，造成循环依赖，也就是下面的情况
+			// isPrototypeCurrentlyInCreation(beanName) 为 true
 			if (isPrototypeCurrentlyInCreation(beanName)) {
 				throw new BeanCurrentlyInCreationException(beanName);
 			}
@@ -1683,7 +1683,7 @@ public abstract class AbstractBeanFactory extends FactoryBeanRegistrySupport imp
 			Object beanInstance, String name, String beanName, @Nullable RootBeanDefinition mbd) {
 
 		// Don't let calling code try to dereference the factory if the bean isn't a factory.
-		// 如果指定的name是工厂相关(以&为前缀)且beanInstance又不是FactoryBean类型则验证不通过
+		// 如果指定的 name 是工厂相关(以 & 为前缀)且 beanInstance 又不是 FactoryBean 类型则验证不通过
 		if (BeanFactoryUtils.isFactoryDereference(name)) {
 			if (beanInstance instanceof NullBean) {
 				return beanInstance;
@@ -1696,10 +1696,7 @@ public abstract class AbstractBeanFactory extends FactoryBeanRegistrySupport imp
 		// Now we have the bean instance, which may be a normal bean or a FactoryBean.
 		// If it's a FactoryBean, we use it to create a bean instance, unless the
 		// caller actually wants a reference to the factory.
-		// 现在我们有了个bean的实例，这个实例可能会是正常的bean或者是FactoryBean
-		// 如果是FactoryBean我们使用它创建实例，但是如果用户想要直接获取工厂实例而不是工厂的
-		// getObject方法对应的实例那么传人的name应该加人前缀&
-		// name 包含 '&' 前缀, 获取 FactoryBean, 直接返回
+		// 如果不是工厂 bean，直接返回
 		if (!(beanInstance instanceof FactoryBean) || BeanFactoryUtils.isFactoryDereference(name)) {
 			return beanInstance;
 		}
@@ -1718,8 +1715,8 @@ public abstract class AbstractBeanFactory extends FactoryBeanRegistrySupport imp
 			// containsBeanDefinition 检测 beanDefinitionMap 中也就是在所有已经加载的类中检测
 			// 是否定义 beanName
 			if (mbd == null && containsBeanDefinition(beanName)) {
-				// 将存储XML配置文件的GernericBeanDefinition转换为RootBeanDefinition,如
-                // 果指定BeanName是子Bean的话同时会合并父类的相关属性
+				// 将存储 XML 配置文件的 GenericBeanDefinition 转换为 RootBeanDefinition, 如果
+                // 指定 BeanName 是子 Bean 的话同时会合并父类的相关属性
 				mbd = getMergedLocalBeanDefinition(beanName);
 			}
 			// 是否是用户定义的而不是应用程序本身定义的
