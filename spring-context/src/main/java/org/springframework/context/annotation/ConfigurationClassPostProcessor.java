@@ -224,7 +224,7 @@ public class ConfigurationClassPostProcessor implements BeanDefinitionRegistryPo
 
 	/**
 	 * Derive(派生) further bean definitions from the configuration classes in the registry.
-	 * 从注册表中的配置类派生更多的Bean定义
+	 * 从注册表中的配置类派生更多的 Bean 定义
 	 */
 	@Override
 	public void postProcessBeanDefinitionRegistry(BeanDefinitionRegistry registry) {
@@ -333,7 +333,7 @@ public class ConfigurationClassPostProcessor implements BeanDefinitionRegistryPo
 		// 循环解析
 		do {
 			parser.parse(candidates);
-			// 验证类不能是final, 方法可重写, 不能是 static, final or private (CGLIB代理限制)
+			// 验证类不能是 final, 方法可重写, 不能是 static, final or private (CGLIB代理限制)
 			parser.validate();
 
 			Set<ConfigurationClass> configClasses = new LinkedHashSet<>(parser.getConfigurationClasses());
@@ -346,7 +346,8 @@ public class ConfigurationClassPostProcessor implements BeanDefinitionRegistryPo
 						registry, this.sourceExtractor, this.resourceLoader, this.environment,
 						this.importBeanNameGenerator, parser.getImportRegistry());
 			}
-			this.reader.loadBeanDefinitions(configClasses); // 注册配置类中配置的各种 BeanDefinitions
+			// 注册配置类中配置的各种 BeanDefinitions
+			this.reader.loadBeanDefinitions(configClasses);
 			alreadyParsed.addAll(configClasses);
 
 			candidates.clear();
